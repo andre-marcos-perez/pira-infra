@@ -12,3 +12,9 @@ terraform {
 provider "aws" {
   region = var.region
 }
+
+module "s3" {
+  source                      = "./modules/s3"
+  environment                 = var.environment
+  nextflow_bucket_name_prefix = var.nextflow_bucket_name_prefix
+}

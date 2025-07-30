@@ -16,6 +16,10 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 
+# Exclude backend configuration files, which are used to configure the backend for storing
+# the Terraform state. These files may contain sensitive information such as access keys.
+**/backend.config
+
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
 override.tf
