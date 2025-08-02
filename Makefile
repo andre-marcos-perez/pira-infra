@@ -11,5 +11,9 @@ lint: ## Lint code
 	@terraform -chdir=nextflow validate
 
 .PHONY: init
-init: ## Init Terraform
+init: ## Init TF
 	@terraform -chdir=nextflow init -backend-config="./backend.config"
+
+.PHONY: plan
+plan: ## Plan TF
+	@terraform -chdir=nextflow plan -var-file="terraform.tfvars"

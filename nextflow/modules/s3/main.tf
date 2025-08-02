@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "nextflow" {
   force_destroy = true
 
   tags = {
-    "Name"        = "nextflow-bucket"
+    "Name"        = "nextflow"
     "Environment" = "${var.environment}"
   }
 }
