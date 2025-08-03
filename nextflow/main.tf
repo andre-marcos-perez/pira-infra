@@ -14,7 +14,22 @@ provider "aws" {
 }
 
 module "s3" {
-  source                      = "./modules/s3"
-  environment                 = var.environment
-  nextflow_bucket_name_prefix = var.nextflow_bucket_name_prefix
+  source               = "./modules/s3"
+  environment          = var.environment
+  nextflow_bucket_name = var.nextflow_bucket_name
+}
+
+module "vpc" {
+  source             = "./modules/vpc"
+  subnet_count       = 1
+  availability_zones = var.availability_zones
+}
+
+module "batch" {
+  source              = "./modules/batch"
+  environment         = var.environment
+  nextflow_batch_name = var.nextflow_batch_name
+  subnet_ids          = module.vpc.private_subnet_ids
+  security_group_id   = module.vpc.default_sg_id
+  batch_service_role  = module.iam.batch_service_role
 }
