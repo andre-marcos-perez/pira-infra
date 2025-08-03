@@ -50,12 +50,12 @@ jobs:
       - name: Terraform format
         run: |
           make format
-      - name: Terraform lint
-        run: |
-          make lint
       - name: Terraform init
         run: |
           make init
+      - name: Terraform lint
+        run: |
+          make lint
       - name: Terraform plan
         run: |
           terraform -chdir=nextflow plan -var-file="env.tfvars.json"
