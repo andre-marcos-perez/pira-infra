@@ -10,6 +10,15 @@ on:
         type: string
         required: true
         description: 'Terraform version to use'
+    secrets:
+      aws-region:
+        required: true
+      aws-access-key-id:
+        required: true
+      aws-secret-access-key:
+        required: true
+      age-secret-key:
+        required: true
 jobs:
   terraform-cd:
     runs-on: ubuntu-latest
@@ -23,9 +32,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.aws-region }}
+          aws-access-key-id: ${{ secrets.aws-access-key-id }}
+          aws-secret-access-key: ${{ secrets.aws-secret-access-key }}
       - name: Set up SOPS
         run: |
           curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64
@@ -33,7 +42,7 @@ jobs:
           chmod +x /usr/local/bin/sops
       - name: Configure Age credentials
         run: |
-          echo "${{ secrets.AGE_SECRET_KEY }}" | base64 --decode > age.key
+          echo "${{ secrets.age-secret-key }}" | base64 --decode > age.key
           echo "SOPS_AGE_KEY_FILE=age.key" >> "$GITHUB_ENV"
       - name: Decrypt Terraform variables
         run: |

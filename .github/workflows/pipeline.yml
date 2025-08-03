@@ -13,6 +13,11 @@ jobs:
     with:
       env: main
       tf-version: 1.12.2
+    secrets:
+      aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      age-secret-key: ${{ secrets.AGE_SECRET_KEY }}
   cd-prod:
     name: "Deploy to live"
     needs: ci
