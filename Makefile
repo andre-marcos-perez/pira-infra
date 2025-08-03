@@ -12,15 +12,15 @@ lint: ## Lint code
 
 .PHONY: init
 init: ## Init TF
-	@terraform -chdir=nextflow init -backend-config="./backend.config.json"
+	@terraform -chdir=nextflow init -backend-config="envs/dev.backend.config.json"
 
 .PHONY: plan
 plan: ## Plan TF
-	@terraform -chdir=nextflow plan -var-file="dev.tfvars.json"
+	@terraform -chdir=nextflow plan -var-file="envs/dev.tfvars.json"
 
 .PHONY: apply
 apply: ## Apply TF
-	@terraform -chdir=nextflow apply -var-file="dev.tfvars.json" -auto-approve
+	@terraform -chdir=nextflow apply -var-file="envs/dev.tfvars.json" -auto-approve
 
 .PHONY: deploy
 deploy: ## Deploy TF
@@ -29,12 +29,14 @@ deploy: ## Deploy TF
 
 .PHONY: decrypt
 decrypt: ## Decrypt secrets
-	@sops --output-type json --decrypt nextflow/backend.config.json.enc > nextflow/backend.config.json
-	@sops --output-type json --decrypt nextflow/dev.tfvars.json.enc > nextflow/dev.tfvars.json
-	@sops --output-type json --decrypt nextflow/main.tfvars.json.enc > nextflow/main.tfvars.json
+	@sops --output-type json --decrypt nextflow/envs/dev.backend.config.json.enc > nextflow/envs/dev.backend.config.json
+	@sops --output-type json --decrypt nextflow/envs/dev.tfvars.json.enc > nextflow/envs/dev.tfvars.json
+	@sops --output-type json --decrypt nextflow/envs/main.backend.config.json.enc > nextflow/envs/main.backend.config.json
+	@sops --output-type json --decrypt nextflow/envs/main.tfvars.json.enc > nextflow/envs/main.tfvars.json
 
 .PHONY: encrypt
 encrypt: ## Encrypt secrets
-	@sops --input-type json --encrypt nextflow/backend.config.json > nextflow/backend.config.json.enc
-	@sops --input-type json --encrypt nextflow/dev.tfvars.json > nextflow/dev.tfvars.json.enc
-	@sops --input-type json --encrypt nextflow/main.tfvars.json > nextflow/main.tfvars.json.enc
+	@sops --input-type json --encrypt nextflow/envs/dev.backend.config.json > nextflow/envs/dev.backend.config.json.enc
+	@sops --input-type json --encrypt nextflow/envs/dev.tfvars.json > nextflow/envs/dev.tfvars.json.enc
+	@sops --input-type json --encrypt nextflow/envs/main.backend.config.json > nextflow/envs/main.backend.config.json.enc
+	@sops --input-type json --encrypt nextflow/envs/main.tfvars.json > nextflow/envs/main.tfvars.json.enc

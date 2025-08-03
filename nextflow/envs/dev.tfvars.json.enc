@@ -1,0 +1,18 @@
+{
+	"region": "ENC[AES256_GCM,data:V+VETUgG7Ppgtonl,iv:YztdfvKQtE74ngMsNchtSQveglYr8O0+Cv5VVyfWXpA=,tag:2jmlTX+7a6MnylMteIXYzQ==,type:str]",
+	"environment": "ENC[AES256_GCM,data:Uk8p,iv:amH6LxGkES73paH5UIspJL9d272Neu7cM5zzwg0UN2g=,tag:3BxpaAlITNZurW3qO+NhDw==,type:str]",
+	"terraform_bucket_name": "ENC[AES256_GCM,data:rSMfrcFTsqhLPdfcIQo=,iv:wZ//j1uvi+PA3DlhfzvExXxTCI0LCRpg6Gjf5C8Sx6w=,tag:10bf7mfjTnaZUVMy43rFsw==,type:str]",
+	"nextflow_bucket_name_prefix": "ENC[AES256_GCM,data:CZ5yxjn1SOYGXt4HFQ==,iv:Q9fcPHDZ5oc7nBxuwtL4YF7pZDWQM4YIYGT29f3vo2g=,tag:MvAOECHcuozPfwxc1dfWHg==,type:str]",
+	"sops": {
+		"age": [
+			{
+				"recipient": "age1deaxwvwpczkhtxrgndmz0f4xlkwnk97ahhmfzl90lx4xparyu4nsn5k50u",
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwRTAycElnalcwck5qZkJC\nRGJHaytEZ1lIazVZRm1QaWVSTmxGVlFhK0hnCitXSkJhOHhud0QvVzB2MHh1ejBY\nZjBUUHRtN3hva3lpQTlpcWw1OVVqeTQKLS0tIHhRcmd0OTVRQUZSRHpmVFBQNDRG\naDlUV1V3QXloakd6VTh1Sk5pbDB3b0UKlqI8dXx4IRVs0D2f3O0Kh/gErxWv7EC5\nNTOd9rG2Wp5W7ZkNTMY7O8++btZRR4HzLBKbMtPajReT/+GJhyWGZg==\n-----END AGE ENCRYPTED FILE-----\n"
+			}
+		],
+		"lastmodified": "2025-08-03T17:15:37Z",
+		"mac": "ENC[AES256_GCM,data:rRzCMzKMb/MtOD6SaEhLnuIvlxF91GnD6JJcdEG7UXFiseirhmHnj5RnQeBGY4srpMyXOoynAb73Sghj/+2WlLChZ7S3WguE9oEt53c9FJO4V6u4PccZicMO1g7qAQUnpnB49vNg/kkZw/THWt3Qox2pv8daF8LRXmrhJ38vkT4=,iv:C0ncvb2jmUrMI4TEjIN2wfozr6jpEVnKxBLkr0+lqCc=,tag:E7W6BcB+MkCjdK0+2rvFZw==,type:str]",
+		"unencrypted_suffix": "_unencrypted",
+		"version": "3.10.2"
+	}
+}

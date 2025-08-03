@@ -46,9 +46,9 @@ jobs:
           echo "SOPS_AGE_KEY_FILE=age.key" >> "$GITHUB_ENV"
       - name: Decrypt Terraform variables
         run: |
-          sops --output-type json --decrypt nextflow/backend.config.json.enc > nextflow/backend.config.json
-          sops --output-type json --decrypt nextflow/${{ inputs.env }}.tfvars.json.enc > nextflow/env.tfvars.json
+          sops --output-type json --decrypt nextflow/envs/backend.config.json.enc > nextflow/envs/backend.config.json
+          sops --output-type json --decrypt nextflow/envs/${{ inputs.env }}.tfvars.json.enc > nextflow/envs/env.tfvars.json
       - name: Terraform init
         run: make init
       - name: Terraform apply
-        run: terraform -chdir=nextflow apply -var-file="env.tfvars.json" -auto-approve
+        run: terraform -chdir=nextflow apply -var-file="envs/env.tfvars.json" -auto-approve
