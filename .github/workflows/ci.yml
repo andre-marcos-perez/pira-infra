@@ -1,0 +1,58 @@
+name: ci
+on:
+  workflow_call:
+    inputs:
+      env:
+        type: string
+        required: true
+        description: 'Environment to deploy to'
+      tf-version:
+        type: string
+        required: true
+        description: 'Terraform version to use'
+    secrets:
+      aws-region:
+        required: true
+      aws-access-key-id:
+        required: true
+      aws-secret-access-key:
+        required: true
+      age-secret-key:
+        required: true
+jobs:
+  terraform-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ inputs.tf-version }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.aws-region }}
+          aws-access-key-id: ${{ secrets.aws-access-key-id }}
+          aws-secret-access-key: ${{ secrets.aws-secret-access-key }}
+      - name: Set up SOPS
+        run: |
+          curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64
+          mv sops-v3.10.2.linux.amd64 /usr/local/bin/sops
+          chmod +x /usr/local/bin/sops
+      - name: Configure Age credentials
+        run: |
+          echo "${{ secrets.age-secret-key }}" | base64 --decode > age.key
+          echo "SOPS_AGE_KEY_FILE=age.key" >> "$GITHUB_ENV"
+      - name: Decrypt Terraform variables
+        run: |
+          sops --output-type json --decrypt nextflow/envs/${{ inputs.env }}.backend.config.json.enc > nextflow/envs/env.backend.config.json
+          sops --output-type json --decrypt nextflow/envs/${{ inputs.env }}.tfvars.json.enc > nextflow/envs/env.tfvars.json
+      - name: Terraform format
+        run: make format
+      - name: Terraform init
+        run: terraform -chdir=nextflow init -backend-config="envs/env.backend.config.json"
+      - name: Terraform lint
+        run: make lint
+      - name: Terraform plan
+        run: terraform -chdir=nextflow plan -var-file="envs/env.tfvars.json"
