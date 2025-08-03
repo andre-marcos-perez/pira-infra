@@ -1,8 +1,0 @@
-region                      = ""
-environment                 = ""
-
-# terraform
-terraform_bucket_name       = ""
-
-# modules/s3
-nextflow_bucket_name_prefix = ""

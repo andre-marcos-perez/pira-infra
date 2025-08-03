@@ -12,7 +12,7 @@ lint: ## Lint code
 
 .PHONY: init
 init: ## Init TF
-	@terraform -chdir=nextflow init -backend-config="./backend.config"
+	@terraform -chdir=nextflow init -backend-config="./backend.config.json"
 
 .PHONY: plan
 plan: ## Plan TF
@@ -29,10 +29,12 @@ deploy: ## Deploy TF
 
 .PHONY: decrypt
 decrypt: ## Decrypt secrets
+	@sops --output-type json --decrypt nextflow/backend.config.json.enc > nextflow/backend.config.json
 	@sops --output-type json --decrypt nextflow/dev.tfvars.json.enc > nextflow/dev.tfvars.json
 	@sops --output-type json --decrypt nextflow/main.tfvars.json.enc > nextflow/main.tfvars.json
 
 .PHONY: encrypt
 encrypt: ## Encrypt secrets
+	@sops --input-type json --encrypt nextflow/backend.config.json > nextflow/backend.config.json.enc
 	@sops --input-type json --encrypt nextflow/dev.tfvars.json > nextflow/dev.tfvars.json.enc
 	@sops --input-type json --encrypt nextflow/main.tfvars.json > nextflow/main.tfvars.json.enc
