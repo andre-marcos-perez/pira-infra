@@ -16,4 +16,18 @@ init: ## Init TF
 
 .PHONY: plan
 plan: ## Plan TF
-	@terraform -chdir=nextflow plan -var-file="terraform.tfvars"
+	@terraform -chdir=nextflow plan -var-file="dev.tfvars.json"
+
+.PHONY: apply
+apply: ## Apply TF
+	@terraform -chdir=nextflow apply -var-file="dev.tfvars.json" -auto-approve
+
+.PHONY: deploy
+deploy: ## Deploy TF
+	@make init
+	@make apply
+
+.PHONY: encrypt
+encrypt: ## Encrypt secrets
+	@sops --input-type json --encrypt nextflow/dev.tfvars.json > nextflow/dev.tfvars.json.enc
+	@sops --input-type json --encrypt nextflow/main.tfvars.json > nextflow/main.tfvars.json.enc
