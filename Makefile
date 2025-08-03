@@ -27,6 +27,11 @@ deploy: ## Deploy TF
 	@make init
 	@make apply
 
+.PHONY: decrypt
+decrypt: ## Decrypt secrets
+	@sops --output-type json --decrypt nextflow/dev.tfvars.json.enc > nextflow/dev.tfvars.json
+	@sops --output-type json --decrypt nextflow/main.tfvars.json.enc > nextflow/main.tfvars.json
+
 .PHONY: encrypt
 encrypt: ## Encrypt secrets
 	@sops --input-type json --encrypt nextflow/dev.tfvars.json > nextflow/dev.tfvars.json.enc

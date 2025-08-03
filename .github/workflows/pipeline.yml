@@ -11,6 +11,7 @@ jobs:
     name: "Run tests and static analysis"
     uses: ./.github/workflows/ci.yml
     with:
+      env: main
       tf-version: 1.12.2
   cd-prod:
     name: "Deploy to live"
