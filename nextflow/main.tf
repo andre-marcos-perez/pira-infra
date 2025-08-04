@@ -16,7 +16,7 @@ provider "aws" {
 module "s3" {
   source               = "./modules/s3"
   environment          = var.environment
-  nextflow_bucket_name = var.nextflow_bucket_name
+  nextflow_bucket_name = var.nextflow_service_prefix
 }
 
 module "vpc" {
@@ -24,10 +24,15 @@ module "vpc" {
   availability_zone = var.availability_zone
 }
 
+module "iam" {
+  source            = "./modules/iam"
+  nextflow_iam_name = var.nextflow_service_prefix
+}
+
 module "batch" {
   source              = "./modules/batch"
   environment         = var.environment
-  nextflow_batch_name = var.nextflow_batch_name
+  nextflow_batch_name = var.nextflow_service_prefix
   subnet_ids          = module.vpc.public_subnet_ids
   security_group_id   = module.vpc.sg_id
   batch_service_role  = module.iam.batch_service_role
