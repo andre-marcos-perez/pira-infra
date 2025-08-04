@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "batch_service_role" {
   name = "${var.nextflow_iam_name}-batch-service-role"
 
@@ -73,7 +75,7 @@ data "aws_iam_policy_document" "cloudwatch" {
       "logs:PutLogEvents"
     ]
     resources = [
-      "arn:aws:logs:*:*:log-group:/aws/batch/job:*"
+      "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/batch/job:*"
     ]
   }
 
