@@ -11,6 +11,10 @@ resource "aws_iam_role" "batch_service_role" {
       Action = "sts:AssumeRole"
     }]
   })
+
+  tags = {
+    "Name" = "nextflow-batch-service-role"
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "batch_iam_policy" {
@@ -31,6 +35,10 @@ resource "aws_iam_role" "fargate_execution_role" {
       Action = "sts:AssumeRole"
     }]
   })
+
+  tags = {
+    "Name" = "nextflow-fargate-execution-role"
+  }
 }
 
 data "aws_iam_policy_document" "s3" {
