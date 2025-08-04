@@ -1,7 +1,3 @@
-variable "availability_zones" {
-  type = list(string)
-}
-
-variable "subnet_count" {
-  type = number
+variable "availability_zone" {
+  type = string
 }

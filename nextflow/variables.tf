@@ -18,6 +18,6 @@ variable "nextflow_batch_name" {
   type = string
 }
 
-variable "availability_zones" {
-  type = list(string)
+variable "availability_zone" {
+  type = string
 }

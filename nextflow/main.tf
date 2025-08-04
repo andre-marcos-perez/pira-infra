@@ -20,16 +20,15 @@ module "s3" {
 }
 
 module "vpc" {
-  source             = "./modules/vpc"
-  subnet_count       = 1
-  availability_zones = var.availability_zones
+  source            = "./modules/vpc"
+  availability_zone = var.availability_zone
 }
 
 module "batch" {
   source              = "./modules/batch"
   environment         = var.environment
   nextflow_batch_name = var.nextflow_batch_name
-  subnet_ids          = module.vpc.private_subnet_ids
-  security_group_id   = module.vpc.default_sg_id
+  subnet_ids          = module.vpc.public_subnet_ids
+  security_group_id   = module.vpc.sg_id
   batch_service_role  = module.iam.batch_service_role
 }
