@@ -68,7 +68,7 @@ jobs:
     - name: Terraform docs
       uses: terraform-docs/gh-actions@v1.4.1
       with:
-        find-dir: ./nextflow/modules/vpc
+        find-dir: ./nextflow/modules
         output-file: README.md
         output-method: inject
         git-push: "true"
