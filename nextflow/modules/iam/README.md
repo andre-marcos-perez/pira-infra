@@ -24,6 +24,7 @@ No modules.
 | [aws_iam_role_policy_attachment.batch_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.fargate_iam_policy_cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.fargate_iam_policy_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
@@ -33,6 +34,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_nextflow_bucket_name"></a> [nextflow\_bucket\_name](#input\_nextflow\_bucket\_name) | n/a | `string` | n/a | yes |
 | <a name="input_nextflow_iam_name"></a> [nextflow\_iam\_name](#input\_nextflow\_iam\_name) | n/a | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | n/a | `string` | n/a | yes |
 
 ## Outputs
 
