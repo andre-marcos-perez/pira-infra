@@ -5,7 +5,7 @@ resource "aws_batch_compute_environment" "nextflow" {
   service_role             = var.batch_service_role
 
   compute_resources {
-    type               = "FARGATE"
+    type               = "FARGATE_SPOT"
     max_vcpus          = 16
     subnets            = var.subnet_ids
     security_group_ids = [var.security_group_id]

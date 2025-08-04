@@ -25,8 +25,9 @@ module "vpc" {
 }
 
 module "iam" {
-  source            = "./modules/iam"
-  nextflow_iam_name = var.nextflow_service_name
+  source               = "./modules/iam"
+  nextflow_iam_name    = var.nextflow_service_name
+  nextflow_bucket_name = module.s3.nextflow_bucket_name
 }
 
 module "batch" {
