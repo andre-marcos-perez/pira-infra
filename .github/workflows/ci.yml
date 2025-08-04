@@ -56,3 +56,11 @@ jobs:
         run: make lint
       - name: Terraform plan
         run: terraform -chdir=nextflow plan -var-file="envs/env.tfvars.json"
+      - name: Terraform Docs
+        uses: terraform-docs/gh-actions@v1.4.1
+        with:
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
+  
