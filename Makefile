@@ -12,31 +12,18 @@ lint: ## Lint code
 
 .PHONY: init
 init: ## Init TF
-	@terraform -chdir=nextflow init -backend-config="envs/dev.backend.config.json"
+	@terraform -chdir=nextflow init -backend-config="envs/main.backend.config.json"
 
 .PHONY: plan
 plan: ## Plan TF
-	@terraform -chdir=nextflow plan -var-file="envs/dev.tfvars.json"
-
-.PHONY: apply
-apply: ## Apply TF
-	@terraform -chdir=nextflow apply -var-file="envs/dev.tfvars.json" -auto-approve
-
-.PHONY: deploy
-deploy: ## Deploy TF
-	@make init
-	@make apply
+	@terraform -chdir=nextflow plan -var-file="envs/main.tfvars.json"
 
 .PHONY: decrypt
 decrypt: ## Decrypt secrets
-	@sops --output-type json --decrypt nextflow/envs/dev.backend.config.json.enc > nextflow/envs/dev.backend.config.json
-	@sops --output-type json --decrypt nextflow/envs/dev.tfvars.json.enc > nextflow/envs/dev.tfvars.json
 	@sops --output-type json --decrypt nextflow/envs/main.backend.config.json.enc > nextflow/envs/main.backend.config.json
 	@sops --output-type json --decrypt nextflow/envs/main.tfvars.json.enc > nextflow/envs/main.tfvars.json
 
 .PHONY: encrypt
 encrypt: ## Encrypt secrets
-	@sops --input-type json --encrypt nextflow/envs/dev.backend.config.json > nextflow/envs/dev.backend.config.json.enc
-	@sops --input-type json --encrypt nextflow/envs/dev.tfvars.json > nextflow/envs/dev.tfvars.json.enc
 	@sops --input-type json --encrypt nextflow/envs/main.backend.config.json > nextflow/envs/main.backend.config.json.enc
 	@sops --input-type json --encrypt nextflow/envs/main.tfvars.json > nextflow/envs/main.tfvars.json.enc

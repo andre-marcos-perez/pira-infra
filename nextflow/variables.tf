@@ -10,7 +10,7 @@ variable "terraform_bucket_name" {
   type = string
 }
 
-variable "nextflow_service_prefix" {
+variable "nextflow_service_name" {
   type = string
 }
 
