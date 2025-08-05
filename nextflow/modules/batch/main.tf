@@ -29,7 +29,7 @@ resource "aws_batch_job_queue" "nextflow" {
   job_state_time_limit_action {
     state            = "RUNNABLE"
     action           = "CANCEL"
-    reason           = ""
+    reason           = "CAPACITY:INSUFFICIENT_INSTANCE_CAPACITY"
     max_time_seconds = 600
   }
 
